@@ -230,6 +230,9 @@ func (interp *Interpreter) gta(root *node, rpath, importPath, pkgName string) ([
 			if packageName := path.Base(ipath); path.Dir(ipath) == packageName {
 				ipath = packageName
 			}
+			if ipath != "." && path.Dir(ipath) != "." {
+				ipath = path.Dir(ipath)
+			}
 			if pkg := interp.binPkg[ipath]; pkg != nil {
 				switch name {
 				case "_": // no import of symbols
